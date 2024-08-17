@@ -27,11 +27,11 @@ function App() {
      <Routes>
       <Route path='/' element={<LandingPage/>}/>
       <Route path='/adminlogin' element={<AdminLogin/>}/>
+      <Route path='/adminhomepage/*' element={<Protect Child={AdminHomePage} role="admin" />}/>
       <Route path='/usersignup' element={<UserSignUp/>}/>
       <Route path='/userlogin' element={<UserLogin/>}/> 
       <Route path='/adminsignup' element={<AdminSignUp/>}/>
       <Route path='/bookbus/:id' element={<Protect Child={BookBus} role="user"/>}/>
-      <Route path='/adminhomepage/*' element={<Protect Child={AdminHomePage} role="admin" />}/>
       <Route path='/user-forgot-password' element={<UserForgotPassword/>}/>
       <Route path='/admin-forgot-password' element={<AdminForgotPassword/>} />
       <Route path='/reset-confirmation' element={<ResetConfirmation />} />

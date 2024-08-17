@@ -15,7 +15,7 @@ export default function UserForgotPassword() {
     setMessage('');
 
     try {
-      const response = await axios.post(`http://localhost:8080/api/users/forgot-password?email=${email}`, null, {
+      const response = await axios.post(`http://deepmindstech.in:8080/api/users/forgot-password?email=${email}`, null, {
         headers: {
           'Content-Type': 'application/json',
         },

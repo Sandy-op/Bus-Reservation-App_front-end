@@ -37,7 +37,7 @@ export default function AddBus() {
     
     function addBusData(e){
         e.preventDefault()
-        axios.post(`http://localhost:8080/api/buses/${admin.id}`,busData)
+        axios.post(`http://deepmindstech.in:8080/api/buses/${admin.id}`,busData)
         .then((res)=>{
             console.log(res);
             alert("Bus Details Have been Added Successfully")

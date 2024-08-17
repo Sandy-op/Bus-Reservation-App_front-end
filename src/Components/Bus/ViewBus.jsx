@@ -8,7 +8,7 @@ export default function ViewBus() {
   let navigate = useNavigate();
 
   const fetchBuses = () => {
-    axios.get(`http://localhost:8080/api/buses`)
+    axios.get(`http://deepmindstech.in:8080/api/buses`)
       .then((res) => {
         console.log(res);
         setbus(res.data.data);
@@ -23,7 +23,7 @@ export default function ViewBus() {
   }, []);
 
   function removeBus(id, busNumber) {
-    axios.delete(`http://localhost:8080/api/buses/${id}`)
+    axios.delete(`http://deepmindstech.in:8080/api/buses/${id}`)
       .then((res) => {
         alert(`Bus Number ${busNumber} has been Removed from the list`);
         fetchBuses();

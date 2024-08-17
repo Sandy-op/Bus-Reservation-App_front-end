@@ -23,7 +23,7 @@ export default function AdminSignUp() {
     });
 
     try {
-      const response = await axios.post(`http://localhost:8080/api/admins`, data, {
+      const response = await axios.post(`http://deepmindstech.in:8080/api/admins`, data, {
         headers: {
           "Content-Type": "application/json",
         },

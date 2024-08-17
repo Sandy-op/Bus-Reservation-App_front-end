@@ -17,7 +17,7 @@ const BookTicket = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/tickets/${busId}/${userId}/${numberOfSeats}`
+        `http://deepmindstech.in:8080/api/tickets/${busId}/${userId}/${numberOfSeats}`
       );
       setTicketResponse(response.data);
     } catch (error) {
@@ -29,7 +29,7 @@ const BookTicket = () => {
 
   const handleDownload = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/tickets/download/${ticketResponse.id}`, {
+      const response = await axios.get(`http://deepmindstech.in:8080/api/tickets/download/${ticketResponse.id}`, {
         responseType: 'blob', // Important for binary data
       });
       const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));

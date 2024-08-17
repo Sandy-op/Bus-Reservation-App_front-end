@@ -13,7 +13,7 @@ export default function BookBus() {
 
   useEffect(() => {
     console.log('User from context:', user);
-    axios.get(`http://localhost:8080/api/buses/${params.id}`)
+    axios.get(`http://deepmindstech.in:8080/api/buses/${params.id}`)
       .then((res) => {
         setBus(res.data.data);
       })

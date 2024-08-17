@@ -20,7 +20,7 @@ export default function EditBus() {
 
     let params = useParams()
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/buses/${params.id}`)
+        axios.get(`http://deepmindstech.in:8080/api/buses/${params.id}`)
             .then((res) => {
                 console.log(res.data);
                 setname(res.data.name);
@@ -55,7 +55,7 @@ export default function EditBus() {
 
     function editBus(e) {
         e.preventDefault()
-        axios.put(`http://localhost:8080/api/buses/${params.id}`, newbus)
+        axios.put(`http://deepmindstech.in:8080/api/buses/${params.id}`, newbus)
             .then((res) => {
                 console.log(res);
                 alert("Bus Details Have been Edited Successfully")

@@ -1,8 +1,11 @@
 import Dropdown from 'react-bootstrap/Dropdown';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
 
 function Dropdown1() {
   return (
-    <Dropdown>
+    <div>
+      <Dropdown>
       <Dropdown.Toggle variant="success" id="dropdown-basic">
        Account
       </Dropdown.Toggle>
@@ -14,6 +17,7 @@ function Dropdown1() {
         <Dropdown.Item href="/">Logout</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
+    </div>
   );
 }
 

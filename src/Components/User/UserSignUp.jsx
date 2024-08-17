@@ -27,7 +27,7 @@ export default function UserSignUp() {
     });
 
     try {
-      const response = await axios.post(`http://localhost:8080/api/users`, data, {
+      const response = await axios.post(`http://deepmindstech.in:8080/api/users`, data, {
         headers: {
           "Content-Type": "application/json",
         },

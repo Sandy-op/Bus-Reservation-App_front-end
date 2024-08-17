@@ -10,7 +10,7 @@ export default function UserLogin() {
   function verify(e) {
     e.preventDefault()
     setLoading(true);
-    axios.post(`http://localhost:8080/api/users/verify-by-email?email=${email}&password=${password}`)
+    axios.post(`http://deepmindstech.in:8080/api/users/verify-by-email?email=${email}&password=${password}`)
       .then((res) => {
         alert("Login Successfull")
         console.log(res.data.data);

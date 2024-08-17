@@ -17,7 +17,7 @@ const AdminResetPassword = () => {
     setMessage('');
 
     try {
-      const response = await axios.put(`http://localhost:8080/api/admins/reset-password/${email}`, {
+      const response = await axios.put(`http://deepmindstech.in:8080/api/admins/reset-password/${email}`, {
         password: newPassword,
       });
 

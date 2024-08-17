@@ -75,7 +75,7 @@ export default function SearchBus() {
 
   function searchBus(e) {
     e.preventDefault();
-    axios.get(`http://localhost:8080/api/buses/find?from=${from}&to=${to}&dateOfDeparture=${dateOfDeparture}`)
+    axios.get(`http://deepmindstech.in:8080/api/buses/find?from=${from}&to=${to}&dateOfDeparture=${dateOfDeparture}`)
       .then(res => {
         console.log(res.data.data);
         setBuses(res.data.data);
