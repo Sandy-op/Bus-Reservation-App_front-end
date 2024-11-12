@@ -41,30 +41,30 @@ export default function SearchBus() {
   
 
   return (
-    <div className="flex flex-col items-center my-5 mx-5 p-4 font-sans bg-neutral-200/60 dark:bg-neutral-900/70 rounded-lg">
+    <div className="flex flex-col items-center my-5 mx-5 p-4 font-sans bg-neutral-200/60 dark:bg-neutral-900/40 rounded-lg">
       <form
         onSubmit={searchBus}
-        className="flex flex-col gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-4 items-center justify-center p-5 border border-gray-300 rounded-lg shadow-md bg-gray-100 w-full"
+        className="flex flex-col gap-5 sm:grid sm:grid-cols-2 lg:grid-cols-4 items-center justify-center p-5 border border-gray-300 rounded-lg shadow-md bg-gray-100 w-full  dark:bg-neutral-900/70"
       >
-        <div className="relative w-full sm:w-48" ref={fromInputRef}>
+        <div className="relative w-full sm:w-55" ref={fromInputRef}>
           <input
             type="text"
             required
             value={from}
             onChange={handleFromChange}
             placeholder="From Location"
-            className="p-2 border border-gray-300 rounded-md text-base w-full focus:outline-none"
+            className="p-2 border border-gray-300 rounded-md text-base w-full focus:outline-none dark:bg-neutral-600/40"
           />
         </div>
 
-        <div className="relative w-full sm:w-48" ref={toInputRef}>
+        <div className="relative w-full sm:w-55" ref={toInputRef}>
           <input
             type="text"
             required
             value={to}
             onChange={handleToChange}
             placeholder="To Location"
-            className="p-2 border border-gray-300 rounded-md text-base w-full focus:outline-none"
+            className="p-2 border border-gray-300 rounded-md text-base w-full focus:outline-none dark:bg-neutral-600/40"
           />
         </div>
 
@@ -73,7 +73,7 @@ export default function SearchBus() {
           required
           value={dateOfDeparture}
           onChange={(e) => setDate(e.target.value)}
-          className="p-2 border border-gray-300 rounded-md text-base w-full sm:w-48 focus:outline-none"
+          className="p-2 border border-gray-300 rounded-md text-base w-full sm:w-48 focus:outline-none dark:bg-neutral-600/40"
         />
 
         <button className="py-2 px-5 w-full sm:w-auto border-none rounded-md bg-green-600 text-white text-base cursor-pointer hover:bg-green-700 transition-all duration-150">

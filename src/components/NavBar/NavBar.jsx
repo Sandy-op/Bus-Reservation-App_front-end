@@ -36,7 +36,7 @@ const NavBar = () => {
           <Link
             key={index}
             to={link.href}
-            className="hover:text-violet-600 ease-in-out duration-300"
+            className=" no-underline text-neutral-600 hover:ext-violet-600 hover:underline ease-in-out duration-300"
           >
             {link.label}
           </Link>

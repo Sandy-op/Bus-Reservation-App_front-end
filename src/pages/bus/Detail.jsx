@@ -25,7 +25,7 @@ const Detail = () => {
                   <h1 className="text-4xl font-bold text-neutral-900 dark:text-neutral-50">
                      {busDetails.name} 
                     <span className="text-base font-normal text-neutral-400 dark:text-neutral-500 ml-3">
-                      ({busDetails.bus_number})
+                      ({busDetails.busNumber})
                     </span>
                   </h1>
                   <div className="flex items-center gap-x-2">

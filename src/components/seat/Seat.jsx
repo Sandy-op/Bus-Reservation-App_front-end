@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 import { GiSteeringWheel } from 'react-icons/gi'
 import { MdOutlineChair } from 'react-icons/md'
@@ -9,8 +10,8 @@ const Seat = ({ seatNumber, isSelected, onClick }) => {
     )
 
 }
-const BusSeatLayout = () => {
-    const totalSeats = 41;
+const BusSeatLayout = ({ busDetails }) => {
+    const totalSeats = busDetails.numberOfSeats;
     const [selectedSeats, setSelectedSeat] = useState([]);
 
     const handleSeatClick = (seatNumber) => {
@@ -39,6 +40,32 @@ const BusSeatLayout = () => {
         }
         return seats;
     };
+
+
+    const handleReserveSeats = async () => {
+        if (selectedSeats.length === 0) {
+            alert('Please select at least one seat.');
+            return;
+        }
+
+        const seatSelectionRequest = {
+            busId: busDetails.id, // assuming busDetails has an 'id' property
+            seatNumbers: selectedSeats,
+        };
+
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_URL}/api/buses/reserve-seats`, seatSelectionRequest);
+            if (response.data.statusCode === 200) {
+                alert('Seats reserved successfully!');
+            } else {
+                alert('Error reserving seats, please try again.');
+            }
+        } catch (error) {
+            console.error('Error reserving seats:', error);
+            alert('Error reserving seats, please try again.');
+        }
+    };
+
 
     return (
         <div className="sapce-y-5 my-4 ">
@@ -101,7 +128,7 @@ const BusSeatLayout = () => {
                     <div className="flex items-center gap-x-2">
                         <RiMoneyRupeeCircleLine className='text-lg text-yellow-600'/>
                         <p className="text-neutral-900 dark:text-neutral-200 text-sm font-normal">
-                            Rs. 750
+                            Rs. {busDetails.costPerSeat}
                         </p>
                     </div>
                 </div>
@@ -132,7 +159,7 @@ const BusSeatLayout = () => {
                         Total Fair Prices:
                     </h3>
                     <p className="text-lg font-medium">
-                        Rs.{selectedSeats.length * 750}
+                        Rs.{selectedSeats.length * busDetails.costPerSeat}
                     </p>
                     <span className="text-sm text-neutral-400 dark:text-neutral-600 font-normal">
                         (Including all of taxes)
