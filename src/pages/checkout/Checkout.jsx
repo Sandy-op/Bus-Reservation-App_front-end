@@ -1,7 +1,13 @@
 import React from 'react'
 import { FaArrowRightLong } from 'react-icons/fa6'
+import { useLocation } from 'react-router-dom';
 
 const Checkout = () => {
+
+    const location = useLocation();
+    const busDetails = location.state?.busDetails;
+
+
     return (
         <div className='w-full lg:px-28 md:px-16 sm:px-7 px-4 mt-[13ch] mb-[8ch] space-y-8'>
             <div className="grid grid-cols-5 gap-16 items-start">
@@ -55,7 +61,7 @@ const Checkout = () => {
                                 <div className="w-full flex items-center gap-x-3">
                                     <div className="w-fit text-base font-medium">
                                         From:- <span className="ml-1 5">
-                                            Location 1
+                                            {busDetails.from}
                                         </span>
                                     </div>
                                     <div className="flex-1">
@@ -63,14 +69,14 @@ const Checkout = () => {
                                     </div>
                                     <div className="w-fit text-base font-medium">
                                         To:- <span className="ml-1 5">
-                                            Location 4
+                                        {busDetails.to}
                                         </span>
                                     </div>
                                 </div>
                                 <div className="w-full flex items-center gap-x-3">
                                     <div className="w-fit text-base font-medium">
                                         Arrive at:- <span className="ml-1 5">
-                                            03:30 PM
+                                            {busDetails.reportingTime}
                                         </span>
                                     </div>
                                     <div className="flex-1">
@@ -78,7 +84,7 @@ const Checkout = () => {
                                     </div>
                                     <div className="w-fit text-base font-medium">
                                         Depart at:- <span className="ml-1 5">
-                                            Location 4
+                                            {busDetails.departureTime}
                                         </span>
                                     </div>
                                 </div>
@@ -88,7 +94,7 @@ const Checkout = () => {
                                             Total No. of Seats
                                         </h6>
                                         <h6 className="text-base text-neutral-700 dark:text-neutral-200 font-medium">
-                                            10 <span className="text-xs">
+                                            {busDetails.numberOfSeats} <span className="text-xs">
                                                 (Driver side)
                                             </span>
                                         </h6>

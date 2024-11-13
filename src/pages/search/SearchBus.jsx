@@ -8,7 +8,7 @@ export default function SearchBus() {
   let [dateOfDeparture, setDate] = useState("");
   let [buses, setBuses] = useState([]);
   let [searched, setSearched] = useState(false);
-  let navigate = useNavigate();
+  let navigate = useNavigate(); 
 
   const fromInputRef = useRef();
   const toInputRef = useRef();
@@ -30,7 +30,7 @@ export default function SearchBus() {
         setSearched(true);
   
         if (fetchedBuses.length > 0) {
-          navigate('/bus', { state: { buses: fetchedBuses } }); // Pass buses array here
+          navigate('/bus', { state: { buses: fetchedBuses } }); 
         }
       })
       .catch((err) => {

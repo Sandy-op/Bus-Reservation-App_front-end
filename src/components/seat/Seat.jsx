@@ -1,26 +1,25 @@
-import axios from 'axios'
-import React, { useState } from 'react'
 import { GiSteeringWheel } from 'react-icons/gi'
 import { MdOutlineChair } from 'react-icons/md'
 import { RiMoneyRupeeCircleLine } from 'react-icons/ri'
 
-const Seat = ({ seatNumber, isSelected, onClick }) => {
+const Seat = ({isSelected, onClick}) => {
+
     return (
         <MdOutlineChair className={`text-3xl -rotate-90 cursor-pointer ${isSelected ? 'text-violet-600' : 'text-neutral-600'}`} onClick={onClick} />
     )
 
 }
-const BusSeatLayout = ({ busDetails }) => {
+const BusSeatLayout = ({ busDetails, selectedSeats, setSelectedSeats }) => {
+
     const totalSeats = busDetails.numberOfSeats;
-    const [selectedSeats, setSelectedSeat] = useState([]);
 
     const handleSeatClick = (seatNumber) => {
         if (selectedSeats.includes(seatNumber)) {
-            setSelectedSeat(selectedSeats.filter((seat) => seat !== seatNumber));
+            setSelectedSeats(selectedSeats.filter((seat) => seat !== seatNumber));
         }
         else {
             if (selectedSeats.length < 10) {
-                setSelectedSeat([...selectedSeats, seatNumber]);
+                setSelectedSeats([...selectedSeats, seatNumber]);
             } else {
                 alert("You can only select a maximum of 10 seats.");
             }
@@ -29,43 +28,17 @@ const BusSeatLayout = ({ busDetails }) => {
 
     const renderSeats = () => {
         let seats = [];
-        for (let i = 1; i <= totalSeats; i++){
+        for (let i = 1; i <= totalSeats; i++) {
             seats.push(
                 <Seat
-                key={i}
-                seatNumber={i}
-                isSelected={selectedSeats.includes(i)}
-                onClick={() => handleSeatClick(i)} />
+                    key={i}
+                    seatNumber={i}
+                    isSelected={selectedSeats.includes(i)}
+                    onClick={() => handleSeatClick(i)} />
             );
         }
         return seats;
     };
-
-
-    const handleReserveSeats = async () => {
-        if (selectedSeats.length === 0) {
-            alert('Please select at least one seat.');
-            return;
-        }
-
-        const seatSelectionRequest = {
-            busId: busDetails.id, // assuming busDetails has an 'id' property
-            seatNumbers: selectedSeats,
-        };
-
-        try {
-            const response = await axios.post(`${process.env.REACT_APP_URL}/api/buses/reserve-seats`, seatSelectionRequest);
-            if (response.data.statusCode === 200) {
-                alert('Seats reserved successfully!');
-            } else {
-                alert('Error reserving seats, please try again.');
-            }
-        } catch (error) {
-            console.error('Error reserving seats:', error);
-            alert('Error reserving seats, please try again.');
-        }
-    };
-
 
     return (
         <div className="sapce-y-5 my-4 ">
@@ -78,7 +51,7 @@ const BusSeatLayout = ({ busDetails }) => {
                 <div className="flex-1 w-full flex">
                     <div className="w-full flex-1 flex gap-x-5 items-stretch">
                         <div className="w-10 h-full border-r-2 border-dashed border-neutral-300 dark:border-neutral-800">
-                            <GiSteeringWheel className='text-3xl mt-6 text-violet-600 -rotate-90'/>
+                            <GiSteeringWheel className='text-3xl mt-6 text-violet-600 -rotate-90' />
                         </div>
 
                         {/* Seat Layout */}
@@ -108,25 +81,25 @@ const BusSeatLayout = ({ busDetails }) => {
                 {/* Instructions and Information */}
                 <div className="space-y-3 w-28">
                     <div className="flex items-center gap-x-2">
-                        <MdOutlineChair className='text-lg text-green-500 -rotate-90'/>
+                        <MdOutlineChair className='text-lg text-green-500 -rotate-90' />
                         <p className="text-neutral-900 dark:text-neutral-200 text-sm font-normal">
                             Available
                         </p>
                     </div>
                     <div className="flex items-center gap-x-2">
-                        <MdOutlineChair className='text-lg text-red-500 -rotate-90'/>
+                        <MdOutlineChair className='text-lg text-red-500 -rotate-90' />
                         <p className="text-neutral-900 dark:text-neutral-200 text-sm font-normal">
                             Booked
                         </p>
                     </div>
                     <div className="flex items-center gap-x-2">
-                        <MdOutlineChair className='text-lg text-blue-500 -rotate-90'/>
+                        <MdOutlineChair className='text-lg text-blue-500 -rotate-90' />
                         <p className="text-neutral-900 dark:text-neutral-200 text-sm font-normal">
                             Selected
                         </p>
                     </div>
                     <div className="flex items-center gap-x-2">
-                        <RiMoneyRupeeCircleLine className='text-lg text-yellow-600'/>
+                        <RiMoneyRupeeCircleLine className='text-lg text-yellow-600' />
                         <p className="text-neutral-900 dark:text-neutral-200 text-sm font-normal">
                             Rs. {busDetails.costPerSeat}
                         </p>
@@ -136,7 +109,7 @@ const BusSeatLayout = ({ busDetails }) => {
 
             {/* Selected seats */}
             {
-                selectedSeats.length > 0 && 
+                selectedSeats.length > 0 &&
                 <div className="!mt-10">
                     <h3 className="text-lg font-bold">
                         Selected Seats:
@@ -153,7 +126,7 @@ const BusSeatLayout = ({ busDetails }) => {
 
             {/* Calculated price */}
             {
-                selectedSeats.length > 0 && 
+                selectedSeats.length > 0 &&
                 <div className="!mt-5 flex items-center gap-x-4">
                     <h3 className="text-lg font-bold">
                         Total Fair Prices:
@@ -171,4 +144,4 @@ const BusSeatLayout = ({ busDetails }) => {
     );
 };
 
-    export default BusSeatLayout;
+export default BusSeatLayout;
