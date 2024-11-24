@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route,Routes } from 'react-router-dom'
-import AdminNavbar from './AdminNavbar'
+import AdminNavbar from './AdminNavbar.jsx'
 import ViewBus from '../Bus/ViewBus'
 import AddBus from '../Bus/AddBus.jsx'
 import EditBus from '../Bus/EditBus.jsx'

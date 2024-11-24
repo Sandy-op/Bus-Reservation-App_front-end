@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../../Styles/ForgotPassword.css';
+import '../../../Styles/ForgotPassword.css';
 
-export default function UserForgotPassword() {
+export default function PassResetLink() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -15,7 +15,7 @@ export default function UserForgotPassword() {
     setMessage('');
 
     try {
-      const response = await axios.post(`http://deepmindstech.in:8080/api/users/forgot-password?email=${email}`, null, {
+      const response = await axios.post(`${process.env.REACT_APP_URL}/api/users/forgot-password?email=${email}`, null, {
         headers: {
           'Content-Type': 'application/json',
         },

@@ -12,7 +12,7 @@ const NavBar = () => {
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/bus", label: "Bus" },
-    { href: "/view", label: "LogIn/SignUp" },
+    { href: "/userAuth", label: "Login/SignUp" },
   ];
 
   const handleClick = () => {
@@ -36,12 +36,21 @@ const NavBar = () => {
           <Link
             key={index}
             to={link.href}
-            className=" no-underline text-neutral-600 hover:ext-violet-600 hover:underline ease-in-out duration-300"
+            className=" no-underline text-neutral-600  dark:text-neutral-50 dark:hover:text-violet-600 hover:text-violet-600 hover:underline ease-in-out duration-300"
           >
             {link.label}
           </Link>
         ))}
       </div>
+
+        <div className="mr-20 lg:flex hidden ">
+            <Link
+              to={'/admin'}
+              className='w-fit bg-red-500 text-neutral-50 no-underline font-medium text-base px-6 py-2 rounded-md hover:bg-gray-500 ease-in-out duration-300'>
+              Admin
+            </Link>
+          </div>
+
 
       {/* Need Help and Theme Section (visible on large screens) */}
       <div className="hidden lg:flex items-center gap-x-5">
@@ -80,6 +89,18 @@ const NavBar = () => {
             </li>
           ))}
         </ul>
+
+           {/* Admin Button (included in dropdown for smaller screens) */}
+        <div className="mt-4 lg:hidden">
+          <Link
+            to={'/admin'}
+            onClick={handleClose}
+            className="w-full  bg-red-500 text-neutral-50 no-underline font-medium text-base px-6 py-2 rounded-md hover:bg-gray-500 ease-in-out duration-300 text-center"
+          >
+            Admin
+          </Link>
+        </div>
+
 
         {/* Need Help and Theme Section (included in dropdown for smaller screens) */}
         <div className="flex flex-col gap-y-2 mt-4">

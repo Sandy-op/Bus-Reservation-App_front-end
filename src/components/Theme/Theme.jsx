@@ -3,7 +3,10 @@ import {FaMoon, FaSun} from 'react-icons/fa6';
 
 
 const Theme = () => {
-    const[theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+    // const[theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+    const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || (prefersDarkMode ? 'dark' : 'light'));
+
 
     useEffect(() => {
         if (theme === 'dark') {

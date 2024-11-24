@@ -1,21 +1,28 @@
+import { useState } from 'react'
 import { GiSteeringWheel } from 'react-icons/gi'
 import { MdOutlineChair } from 'react-icons/md'
 import { RiMoneyRupeeCircleLine } from 'react-icons/ri'
 
-const Seat = ({isSelected, onClick}) => {
+const Seat = ({ isSelected, isBooked, onClick }) => {
 
     return (
-        <MdOutlineChair className={`text-3xl -rotate-90 cursor-pointer ${isSelected ? 'text-violet-600' : 'text-neutral-600'}`} onClick={onClick} />
+        <MdOutlineChair 
+            className={`text-3xl -rotate-90 cursor-pointer ${
+                isBooked ? 'text-rose-600' : isSelected ? 'text-violet-600' : 'text-green-500'
+            }`} 
+            onClick={!isBooked ? onClick : null} 
+        />
     )
 
 }
-const BusSeatLayout = ({ busDetails, selectedSeats, setSelectedSeats }) => {
+const BusSeatLayout = ({ busDetails, bookedSeats = [] }) => {
 
-    const totalSeats = busDetails.numberOfSeats;
+    const totalSeats = busDetails.numberOfSeats || 40;
+    const[selectedSeats, setSelectedSeats] = useState([]);
 
     const handleSeatClick = (seatNumber) => {
         if (selectedSeats.includes(seatNumber)) {
-            setSelectedSeats(selectedSeats.filter((seat) => seat !== seatNumber));
+            setSelectedSeats(selectedSeats.filter(seat => seat !== seatNumber));
         }
         else {
             if (selectedSeats.length < 10) {
@@ -27,14 +34,22 @@ const BusSeatLayout = ({ busDetails, selectedSeats, setSelectedSeats }) => {
     }
 
     const renderSeats = () => {
+        if (bookedSeats.length > 0) {
+            console.log('Booked Seats:', bookedSeats);
+        }
+
         let seats = [];
         for (let i = 1; i <= totalSeats; i++) {
+            const isBooked = bookedSeats.includes(i);
+            const isSelected = selectedSeats.includes(i);
             seats.push(
                 <Seat
                     key={i}
                     seatNumber={i}
-                    isSelected={selectedSeats.includes(i)}
-                    onClick={() => handleSeatClick(i)} />
+                    isBooked={isBooked}
+                    isSelected={isSelected}
+                    onClick={() => handleSeatClick(i)} 
+                />
             );
         }
         return seats;
@@ -87,13 +102,13 @@ const BusSeatLayout = ({ busDetails, selectedSeats, setSelectedSeats }) => {
                         </p>
                     </div>
                     <div className="flex items-center gap-x-2">
-                        <MdOutlineChair className='text-lg text-red-500 -rotate-90' />
+                        <MdOutlineChair className='text-lg text-rose-600 -rotate-90' />
                         <p className="text-neutral-900 dark:text-neutral-200 text-sm font-normal">
                             Booked
                         </p>
                     </div>
                     <div className="flex items-center gap-x-2">
-                        <MdOutlineChair className='text-lg text-blue-500 -rotate-90' />
+                        <MdOutlineChair className='text-lg text-violet-600 -rotate-90' />
                         <p className="text-neutral-900 dark:text-neutral-200 text-sm font-normal">
                             Selected
                         </p>
@@ -115,11 +130,13 @@ const BusSeatLayout = ({ busDetails, selectedSeats, setSelectedSeats }) => {
                         Selected Seats:
                     </h3>
                     <div className="flex flex-wrap">
-                        {selectedSeats.map(seat =>
-                            <div className="w-10 h-10 rounded-md m-1.5 text-lg font-medium bg-violet-600/30 flex items-center justify-center">
+                        {selectedSeats.map(seat => (
+                            <div
+                                key={seat}
+                                className="w-10 h-10 rounded-md m-1.5 text-lg font-medium bg-violet-600/30 flex items-center justify-center">
                                 {seat}
                             </div>
-                        )}
+                        ))}
                     </div>
                 </div>
             }

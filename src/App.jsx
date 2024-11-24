@@ -7,6 +7,10 @@ import LandingPage from './pages/LandingPage';
 import Bus from './pages/bus/Bus';
 import Detail from './pages/bus/Detail';
 import Checkout from './pages/checkout/Checkout';
+import UserLogin from './pages/auth/User/UserLogin';
+import UserResetPassword from './pages/auth/User/UserResetPassword';
+import UserSignUp from './pages/auth/User/UserSignUp';
+import PassResetLink from './pages/auth/User/PassResetLink';
 
 
 function App() {
@@ -19,6 +23,10 @@ function App() {
           <Route path='/bus' element={<Bus />} />
           <Route path='bus/bus-details' element={<Detail />} />
           <Route path='bus/bus-details/checkout' element={<Checkout />} />
+          <Route path='/userAuth' element={<UserLogin />} />
+          <Route path='/user-reset-password' element={<UserResetPassword />} />
+          <Route path='/usersignup' element={<UserSignUp />} />
+          <Route path='/reset-link' element={<PassResetLink />} />
           <Route path='/*' element={<PageNotFound />} />
         </Routes>
         <Footer />

@@ -15,35 +15,35 @@ const Checkout = () => {
                     <h2 className="text-xl py-3 text-neutral-800 dark:text-neutral-100 font-medium">
                         Passenger Information
                     </h2>
-                    <from className="sapce-y-6">
+                    <div className="sapce-y-6">
                         <div className="">
-                            <label htmlFor="fullname" className='block mb-2 font-semibold'>
+                            <p className='block mb-2 font-semibold'>
                                 Full Name
-                            </label>
-                            <input type="text" id='fullname' placeholder='e.g. Sandeep Anand' name='fullname' className='w-full appearance-none text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 bg-neutral-200/60 dark:bg-neutral-900/60 px-3 h-12 border-neutral-200 dark:border-neutral-900 rounded-md focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-800' />
+                            </p>
+                            <p className='w-full appearance-none flex items-center text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 bg-neutral-200/60 dark:bg-neutral-900/60 px-3 h-12 border-neutral-200 dark:border-neutral-900 rounded-md focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-800'>sandeep</p>
                         </div>
                         <div className="">
-                            <label htmlFor="email" className='block mb-2 font-semibold'>
+                            <p htmlFor="email" className='block mb-2 font-semibold'>
                                 Email Address
-                            </label>
+                            </p>
                             <input type="email" id='email' placeholder='e.g. sandeep.cnct404@gmail.com' name='email' className='w-full appearance-none text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 bg-neutral-200/60 dark:bg-neutral-900/60 px-3 h-12 border-neutral-200 dark:border-neutral-900 rounded-md focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-800' />
                             <small className="block mt-1-xs text-neutral-500 dark:text-neutral-600 font-normal">
                                 You will get your ticket via this email address.
                             </small>
                         </div>
                         <div className="">
-                            <label htmlFor="phone" className='block mb-2 font-semibold'>
+                            <p htmlFor="phone" className='block mb-2 font-semibold'>
                                 Phone No.
-                            </label>
+                            </p>
                             <input type="number" id='phone' placeholder='e.g. (+91) 9931122072' name='phone' className='w-full appearance-none text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 bg-neutral-200/60 dark:bg-neutral-900/60 px-3 h-12 border-neutral-200 dark:border-neutral-900 rounded-md focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-800' />
                         </div>
                         <div className="">
-                            <label htmlFor="address" className='block mb-2 font-semibold'>
-                                Full Name
-                            </label>
-                            <input type="text" id='address' placeholder='e.g. Hajipur, Bihar' name='address' className='w-full appearance-none text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 bg-neutral-200/60 dark:bg-neutral-900/60 px-3 h-12 border-neutral-200 dark:border-neutral-900 rounded-md focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-800' />
+                            <p className='block my-2 font-semibold'>
+                                Address
+                            </p>
+                            <p className='w-full appearance-none flex items-center text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 bg-neutral-200/60 dark:bg-neutral-900/60 px-3 h-12 border-neutral-200 dark:border-neutral-900 rounded-md focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-800'>Hajipur</p>
                         </div>
-                    </from>
+                    </div>
                 </div>
 
                 <div className="col-span-2 space-y-8">
@@ -106,7 +106,7 @@ const Checkout = () => {
                                             Total Amount
                                         </h6>
                                         <h6 className="text-base text-neutral-700 dark:text-neutral-200 font-medium">
-                                            Rs. 5000
+                                            Rs. {busDetails.costPerSeat}
                                         </h6>
                                     </div>
                                 </div>

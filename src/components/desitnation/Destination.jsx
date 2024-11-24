@@ -8,13 +8,13 @@ const Destination = ({ busDetails }) => {
                 </h1>
                 <div className="w-full flex items-center gap-x-3">
                     <div className="w-fit text-base font-semibold">
-                        From:- <sapn className="m1-1.5 font font-bold">{busDetails.from}</sapn>
+                        From:- <span className="m1-1.5 font font-bold">{busDetails.from}</span>
                     </div>
                     <div className="flex-1">
                         <div className="w-full h-[1px] border border-dashed border-neutral-200 dark:border-neutral-800/80"></div>
                     </div>
                     <div className="w-fit text-base font-semibold">
-                        To:- <sapn className="m1-1.5 font-bold">{busDetails.to}</sapn>
+                        To:- <span className="m1-1.5 font-bold">{busDetails.to}</span>
                     </div>
                 </div>
             </div>
