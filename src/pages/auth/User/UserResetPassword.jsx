@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const UserResetPassword = () => {
-  const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+
+  const query = new URLSearchParams(useLocation().search);
+  const token = query.get('token');
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/userAuth");
+      return;
+    }
+  });
+
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
@@ -17,14 +27,17 @@ const UserResetPassword = () => {
     setMessage("");
 
     try {
-      const response = await axios.put(
-        `${process.env.REACT_APP_URL}/api/users/reset-password/${email}`,
-        { password: newPassword }
-      );
+      const response = await axios.put(`${process.env.REACT_APP_URL}/api/users/reset-password`, {
+        token,
+        password: newPassword,
+      });
+      console.log(response.data);
 
       if (response.status === 202) {
         setMessage("🎉 Password successfully reset!");
-        setTimeout(() => navigate("/userlogin"), 2000);
+        localStorage.removeItem("resetToken");
+        document.cookie = "resetToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+        setTimeout(() => navigate("/userAuth"), 3000);
       } else {
         setMessage("🚨 Oops! Something went wrong.");
       }
@@ -43,17 +56,6 @@ const UserResetPassword = () => {
           Reset Password
         </h2>
         <form onSubmit={handleResetPassword} className="space-y-6">
-          <div>
-            <label className="block text-sm font-semibold mb-1">Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              required
-            />
-          </div>
           <div>
             <label className="block text-sm font-semibold mb-1">
               New Password
@@ -79,11 +81,10 @@ const UserResetPassword = () => {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-2 rounded-lg text-lg font-bold shadow-md transition-transform ${
-              loading
-                ? "bg-gray-300 cursor-not-allowed"
-                : "bg-gradient-to-r from-green-400 to-blue-500 hover:from-blue-500 hover:to-green-400"
-            }`}
+            className={`w-full py-2 rounded-lg text-lg font-bold shadow-md transition-transform ${loading
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-gradient-to-r from-green-400 to-blue-500 hover:from-blue-500 hover:to-green-400"
+              }`}
           >
             {loading ? "Resetting..." : "Reset Password"}
           </button>

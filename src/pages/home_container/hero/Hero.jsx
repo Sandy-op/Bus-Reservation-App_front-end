@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
 
-
     const imageVariants = {
         initial: { x: "100%" },
         animate: {
@@ -14,7 +13,7 @@ const Hero = () => {
     };
 
     return (
-        <div className='w-full h-[calc(100vh-8ch)] lg:pl-28 md:pl-16 sm:pl-7 px-4 mt-[8ch] flex items-center justify-center flex-col hero relative'>
+        <div className='w-full h-[calc(100vh-8ch)] lg:pl-28 md:pl-16 sm:pl-7 px-4 mt-[8ch] mb-12 flex items-center justify-center flex-col hero relative'>
             <div className="flex-1 w-full flex items-stretch justify-between gap-6 md:gap-10 lg:gap-12 pb-10">
                 <motion.div
                     className="w-full md:w-[50%] lg:w-[35%] h-auto rounded-md flex justify-center flex-col space-y-8 md:space-y-10 lg:space-y-14"

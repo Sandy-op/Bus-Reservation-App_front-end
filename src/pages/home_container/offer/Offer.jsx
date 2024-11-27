@@ -21,7 +21,7 @@ const Offer = () => {
     };
 
     return (
-        <div className='w-full lg:px-28 md:px-20 sm:px-10 px-4 mb-[8ch]'>
+        <div className='w-full lg:px-28 md:px-20 sm:px-10 px-4 my-7'>
             <div className="w-full flex flex-col sm:flex-row items-center justify-between mb-6">
                 <h1 className="text-2xl font-medium">
                     Special Offer

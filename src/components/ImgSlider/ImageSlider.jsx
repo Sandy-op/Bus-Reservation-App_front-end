@@ -24,7 +24,7 @@ const ImageSlider = () => {
     <Slider {...settings}>
       {images.map((image, index) => (
         <div key={index}>
-          <img src={image} alt={`Bus10 ${index + 1}`} className="w-full h-[20rem] object-contain border-2 border-dashed" />
+          <img src={image} alt={`Bus10 ${index + 1}`} className="w-full h-[20rem] object-contain border-2 my-7 border-dashed" />
         </div>
       ))}
     </Slider>

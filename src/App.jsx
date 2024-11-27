@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PageNotFound from './components/PageNotFound';
 import NavBar from './components/NavBar/NavBar'
@@ -11,6 +11,8 @@ import UserLogin from './pages/auth/User/UserLogin';
 import UserResetPassword from './pages/auth/User/UserResetPassword';
 import UserSignUp from './pages/auth/User/UserSignUp';
 import PassResetLink from './pages/auth/User/PassResetLink';
+import Protect from './components/security/Protect';
+import BookTicket from './pages/ticket/BookTicket';
 
 
 function App() {
@@ -22,7 +24,8 @@ function App() {
           <Route path='/' element={<LandingPage />} />
           <Route path='/bus' element={<Bus />} />
           <Route path='bus/bus-details' element={<Detail />} />
-          <Route path='bus/bus-details/checkout' element={<Checkout />} />
+          <Route path="bus/bus-details/checkout" element={<Protect role="user"><Checkout /></Protect>} />
+          <Route path="bus/bus-details/checkout/ticket" element={<Protect role="user"><BookTicket /></Protect>} />
           <Route path='/userAuth' element={<UserLogin />} />
           <Route path='/user-reset-password' element={<UserResetPassword />} />
           <Route path='/usersignup' element={<UserSignUp />} />

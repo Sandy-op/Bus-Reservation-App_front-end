@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('User')); // Added: Read user from local storage
+    const storedUser = JSON.parse(localStorage.getItem('User'));
     if (storedUser) {
       setUser(storedUser);
     }
@@ -16,12 +16,12 @@ export const AuthProvider = ({ children }) => {
 
   const login = (userData) => {
     setUser(userData);
-    localStorage.setItem('User', JSON.stringify(userData)); // Added: Save user to local storage
+    localStorage.setItem('User', JSON.stringify(userData));
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('User'); // Added: Remove user from local storage
+    localStorage.removeItem('User');
   };
 
   return (

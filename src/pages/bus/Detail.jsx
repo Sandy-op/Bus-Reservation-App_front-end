@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Bus from '../../assets/bus9.png';
 import { FaStar } from 'react-icons/fa';
@@ -5,37 +6,36 @@ import { Link, useLocation } from 'react-router-dom';
 import Destination from '../../components/desitnation/Destination';
 import BusSeatLayout from '../../components/seat/Seat';
 import DepartAt from '../../components/departtime/DepartAt';
-import axios from 'axios';
 
 
 const Detail = () => {
 
   const location = useLocation();
+  console.log("Login State on Redirect:", location.state);
   const busDetails = location.state?.busDetails;
   const [bookedSeats, setBookedSeats] = useState([]);
 
-useEffect(() => {
-  const fetchBookedSeats = async () => {
-      if (busDetails && busDetails.id) {
-          try {
-              const response = await axios.get(
-                  `${process.env.REACT_APP_URL}/api/tickets/bookedSeats/${busDetails.id}`
-              );
-              console.log("Response data:", response.data);
 
-              // Extract the data and ensure it's an array of numbers
-              const seats = response.data?.data?.map(seat => Number(seat)) || [];
-              if (seats.length > 0) {
-                    console.log("Parsed Booked Seats:", seats);
-                    setBookedSeats(seats); // Set booked seats
-                }
-          } catch (error) {
-              console.error("Error fetching booked seats:", error);
+  useEffect(() => {
+    const fetchBookedSeats = async () => {
+      if (busDetails && busDetails.id) {
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_URL}/api/tickets/bookedSeats/${busDetails.id}`
+          );
+          console.log("Response data:", response.data);
+          const seats = response.data?.data?.map(seat => Number(seat)) || [];
+          if (seats.length > 0) {
+            console.log("Parsed Booked Seats:", seats);
+            setBookedSeats(seats); // Set booked seats
           }
+        } catch (error) {
+          console.error("Error fetching booked seats:", error);
+        }
       }
-  };
-  fetchBookedSeats();
-}, [busDetails]);
+    };
+    fetchBookedSeats();
+  }, [busDetails]);
 
 
   return (
@@ -71,21 +71,14 @@ useEffect(() => {
         </div>
         <div className="col-span-1 sapce-y-10">
           <div className="space-y-6 mb-4">
-            {/* {Destination card} */}
             <Destination busDetails={busDetails} />
-
-            {/* { Departure card} */}
             <DepartAt busDetails={busDetails} />
           </div>
-
-          {/* {Seat Selection } */}
           <BusSeatLayout busDetails={busDetails} bookedSeats={bookedSeats || []} />
-
-          {/* {Checkout Btn} */}
           <div className="flex">
             <Link
               to={'/bus/bus-details/checkout'}
-              state={{ busDetails: busDetails}}
+              state={{ busDetails: busDetails }}
               className='w-fit bg-violet-600 text-neutral-50 font-medium text-base px-6 py-2 rounded-md hover:bg-violet-700 ease-in-out duration-300'>
               Processed to Checkout
             </Link>

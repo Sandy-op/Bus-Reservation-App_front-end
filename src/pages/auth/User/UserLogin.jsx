@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
@@ -8,19 +8,24 @@ const UserLogin = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const nav = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const busDetails = location.state?.busDetails;
 
   const verify = (e) => {
     e.preventDefault();
     setLoading(true);
+
     axios
       .post(
         `${process.env.REACT_APP_URL}/api/users/verify-by-email?email=${email}&password=${password}`
       )
       .then((res) => {
         alert("🚀 Login Successful!");
-        localStorage.setItem("User", JSON.stringify(res.data.data));
-        nav("/search-bus");
+        const fetchedUser = res.data.data;
+        localStorage.setItem("User", JSON.stringify(fetchedUser));
+        const redirectTo = location.state?.from || "/bus/bus-details";
+        navigate(redirectTo, { state: { busDetails } });
       })
       .catch(() => {
         alert("❌ Login Failed!");
@@ -39,9 +44,8 @@ const UserLogin = () => {
           {[...Array(50)].map((_, i) => (
             <div
               key={i}
-              className={`absolute w-2 h-2 bg-white rounded-full animate-floating ${
-                i % 2 === 0 ? "opacity-70" : "opacity-40"
-              }`}
+              className={`absolute w-2 h-2 bg-white rounded-full animate-floating ${i % 2 === 0 ? "opacity-70" : "opacity-40"
+                }`}
               style={{
                 top: `${Math.random() * 100}%`,
                 left: `${Math.random() * 100}%`,
@@ -94,7 +98,7 @@ const UserLogin = () => {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
             <Link
-              to="/user-reset-password"
+              to="/reset-link"
               className="text-xs text-indigo-400 hover:text-indigo-200 block mt-2"
             >
               Forgot Password?
