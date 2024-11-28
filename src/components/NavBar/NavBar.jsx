@@ -76,7 +76,7 @@ const NavBar = () => {
 
       {/* Dropdown Menu (visible on smaller screens when open) */}
       <div className={`${open ? 'flex' : 'hidden'} lg:hidden flex-col w-full bg-neutral-100 dark:bg-neutral-900 shadow-md rounded-md absolute top-14 left-0 px-4 py-4`}>
-        <ul className="flex flex-col gap-y-2 text-base text-neutral-600 dark:text-neutral-500 font-medium">
+        <ul className="flex flex-col gap-y-2 text-base text-neutral-600 dark:text-neutral-500 font-medium p-4">
           {navLinks.map((link, index) => (
             <li key={index}>
               <Link
@@ -91,7 +91,7 @@ const NavBar = () => {
         </ul>
 
            {/* Admin Button (included in dropdown for smaller screens) */}
-        <div className="mt-4 lg:hidden">
+        <div className=" pl-4 lg:hidden">
           <Link
             to={'/admin'}
             onClick={handleClose}
@@ -103,7 +103,7 @@ const NavBar = () => {
 
 
         {/* Need Help and Theme Section (included in dropdown for smaller screens) */}
-        <div className="flex flex-col gap-y-2 mt-4">
+        <div className="flex flex-col gap-y-4 p-4">
           <div className="relative bg-violet-600 rounded-md px-8 py-2 w-fit cursor-pointer">
             <div className="absolute top-1/2 -left-6 transform -translate-y-1/2 w-9 h-9 rounded-full bg-violet-600 border-4 border-neutral-100 dark:border-neutral-900 flex items-center justify-center">
               <FaPhone className="text-neutral-50 text-sm" />
@@ -113,8 +113,8 @@ const NavBar = () => {
               <p className="text-xs font-normal text-neutral-50 tracking-wide">+91 9931122072</p>
             </div>
           </div>
-          <Theme />
         </div>
+          <Theme />
       </div>
     </div>
   );

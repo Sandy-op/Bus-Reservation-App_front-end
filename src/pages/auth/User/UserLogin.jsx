@@ -24,7 +24,7 @@ const UserLogin = () => {
         alert("🚀 Login Successful!");
         const fetchedUser = res.data.data;
         localStorage.setItem("User", JSON.stringify(fetchedUser));
-        const redirectTo = location.state?.from || "/bus/bus-details";
+        const redirectTo = location.state?.from || "/";
         navigate(redirectTo, { state: { busDetails } });
       })
       .catch(() => {

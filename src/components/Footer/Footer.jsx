@@ -13,7 +13,10 @@ const Footer = () => {
             <img src={Logo} alt="logo" className="w-44 h-auto object-contain" />
           </Link>
           <p className="text-neutral-600 dark:text-neutral-500 text-base font-normal pr-10">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam placeat corporis, rerum laborum optio laboriosam perferendis sit culpa doloribus, tempora aliquam repellendus reprehenderit, ullam alias.
+            Gbus is an innovative online bus ticketing platform designed to make your travel experience seamless and hassle-free.
+            With Gbus, users can search, compare, and book bus tickets for a variety of routes effortlessly.
+            Our user-friendly interface ensures quick navigation, while real-time seat availability and detailed bus information empower travelers to make informed decisions.
+            Whether you're planning a short trip or a long journey, Gbus connects you to reliable bus operators, offering convenience, comfort, and value for your travel needs.
           </p>
         </div>
 
