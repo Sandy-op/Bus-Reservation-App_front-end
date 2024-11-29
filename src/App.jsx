@@ -12,7 +12,7 @@ import UserResetPassword from './pages/auth/User/UserResetPassword';
 import UserSignUp from './pages/auth/User/UserSignUp';
 import PassResetLink from './pages/auth/User/PassResetLink';
 import Protect from './components/security/Protect';
-import BookTicket from './pages/ticket/BookTicket';
+import TicketDownload from './pages/ticket/TicketDownload';
 
 
 function App() {
@@ -25,11 +25,12 @@ function App() {
           <Route path='/bus' element={<Bus />} />
           <Route path='bus/bus-details' element={<Detail />} />
           <Route path="bus/bus-details/checkout" element={<Protect role="user"><Checkout /></Protect>} />
-          <Route path="bus/bus-details/checkout/ticket" element={<Protect role="user"><BookTicket /></Protect>} />
+          <Route path="bus/bus-details/checkout/ticket" element={<Protect role="user"><TicketDownload /></Protect>} />
           <Route path='/userAuth' element={<UserLogin />} />
           <Route path='/user-reset-password' element={<UserResetPassword />} />
           <Route path='/usersignup' element={<UserSignUp />} />
           <Route path='/reset-link' element={<PassResetLink />} />
+          {/* <Route path='/ticket' element={<TicketDownload />} /> */}
           <Route path='/*' element={<PageNotFound />} />
         </Routes>
         <Footer />
