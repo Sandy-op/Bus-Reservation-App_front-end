@@ -36,7 +36,7 @@ const UserLogin = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen bg-black overflow-hidden mt-14 p-4 sm:p-6">
+    <div className="relative flex items-center justify-center min-h-screen bg-black overflow-hidden p-4 sm:p-6">
       {/* Particle Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-800 to-black">
         <div className="absolute inset-0 z-0 bg-black bg-opacity-40"></div>

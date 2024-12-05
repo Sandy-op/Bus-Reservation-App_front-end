@@ -46,7 +46,7 @@ export default function UserSignUp() {
   };
 
   return (
-    <div className="flex items-center justify-center mt-14 min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white p-4">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white p-4">
       <div className="relative w-full max-w-md p-6 bg-gray-800 bg-opacity-80 rounded-lg shadow-xl border border-blue-500">
         {/* Glow Effect */}
         <div className="absolute -top-3 -right-3 w-20 h-20 bg-blue-500 rounded-full filter blur-lg opacity-40 animate-pulse"></div>

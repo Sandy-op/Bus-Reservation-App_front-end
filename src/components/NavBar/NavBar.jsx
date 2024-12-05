@@ -43,14 +43,14 @@ const NavBar = () => {
         ))}
       </div>
 
-        <div className="mr-20 lg:flex hidden ">
-            <Link
-              to={'/admin'}
-              className='w-fit bg-red-500 text-neutral-50 no-underline font-medium text-base px-6 py-2 rounded-md hover:bg-gray-500 ease-in-out duration-300'>
-              Admin
-            </Link>
-          </div>
-
+      {/* Admin Button on lg */}
+      <div className="mr-20 lg:flex hidden ">
+        <Link
+          to={'/adminAuth'}
+          className='w-fit bg-red-500 text-neutral-50 no-underline font-medium text-base px-6 py-2 rounded-md hover:bg-gray-500 ease-in-out duration-300'>
+          Admin
+        </Link>
+      </div>
 
       {/* Need Help and Theme Section (visible on large screens) */}
       <div className="hidden lg:flex items-center gap-x-5">
@@ -76,7 +76,7 @@ const NavBar = () => {
 
       {/* Dropdown Menu (visible on smaller screens when open) */}
       <div className={`${open ? 'flex' : 'hidden'} lg:hidden flex-col w-full bg-neutral-100 dark:bg-neutral-900 shadow-md rounded-md absolute top-14 left-0 px-4 py-4`}>
-        <ul className="flex flex-col gap-y-2 text-base text-neutral-600 dark:text-neutral-500 font-medium p-4">
+        <ul className="flex flex-col gap-y-3 text-base text-neutral-600 dark:text-neutral-500 font-medium px-10 pt-5 pb-8">
           {navLinks.map((link, index) => (
             <li key={index}>
               <Link
@@ -89,11 +89,12 @@ const NavBar = () => {
             </li>
           ))}
         </ul>
+          <div className="lg:hidden pl-10 pb-8"><Theme /></div>
 
-           {/* Admin Button (included in dropdown for smaller screens) */}
-        <div className=" pl-4 lg:hidden">
+        {/* Admin Button (included in dropdown for smaller screens) */}
+        <div className=" pl-10 pb-8 lg:hidden">
           <Link
-            to={'/admin'}
+            to={'/adminAuth'}
             onClick={handleClose}
             className="w-full  bg-red-500 text-neutral-50 no-underline font-medium text-base px-6 py-2 rounded-md hover:bg-gray-500 ease-in-out duration-300 text-center"
           >
@@ -103,7 +104,7 @@ const NavBar = () => {
 
 
         {/* Need Help and Theme Section (included in dropdown for smaller screens) */}
-        <div className="flex flex-col gap-y-4 p-4">
+        <div className="flex flex-col pl-10">
           <div className="relative bg-violet-600 rounded-md px-8 py-2 w-fit cursor-pointer">
             <div className="absolute top-1/2 -left-6 transform -translate-y-1/2 w-9 h-9 rounded-full bg-violet-600 border-4 border-neutral-100 dark:border-neutral-900 flex items-center justify-center">
               <FaPhone className="text-neutral-50 text-sm" />
@@ -114,7 +115,7 @@ const NavBar = () => {
             </div>
           </div>
         </div>
-          <Theme />
+        <div className="lg:flex hidden"><Theme/></div>
       </div>
     </div>
   );

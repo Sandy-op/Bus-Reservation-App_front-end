@@ -5,7 +5,6 @@ const About = () => {
     <div className="bg-gray-900 text-white min-h-screen font-sans mt-[8ch] overflow-hidden scroll-smooth">
       {/* Hero Section */}
       <header className="text-center py-16 bg-gradient-to-br from-purple-700 to-blue-700 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30 bg-[url('https://source.unsplash.com/1920x1080/?travel,bus')] bg-cover"></div>
         <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500 relative">
           Welcome to GBUS!
         </h1>
@@ -89,8 +88,8 @@ const About = () => {
           Our Vision
         </h2>
         <p className="mt-4 text-center max-w-2xl mx-auto text-gray-300">
-          At GBUS, we aim to revolutionize bus travel by combining technology, comfort, 
-          and efficiency. Our goal is to make every journey memorable while ensuring 
+          At GBUS, we aim to revolutionize bus travel by combining technology, comfort,
+          and efficiency. Our goal is to make every journey memorable while ensuring
           safety and satisfaction.
         </p>
       </section>
