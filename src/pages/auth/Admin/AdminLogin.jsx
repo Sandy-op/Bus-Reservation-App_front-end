@@ -24,8 +24,8 @@ const AdminLogin = () => {
         localStorage.setItem("Admin", JSON.stringify(fetchedAdmin));
         navigate('admin-home-page');
       })
-      .catch(() => {
-        alert("❌ Login Failed!");
+      .catch((error) => {
+        alert("❌ Login Failed!\n " + (error.response?.data?.message || "An unknown error occurred."));
       })
       .finally(() => {
         setLoading(false);

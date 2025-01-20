@@ -38,8 +38,8 @@ export default function UserSignUp() {
         return;
       }
       alert(`Unexpected response. Status code: ${response.status}.`);
-    } catch (err) {
-      setMessage("An error occurred. Please check your details and try again.");
+    } catch (error) {
+      setMessage("❌ SignUp Failed!\n " + (error.response?.data?.message || "An unknown error occurred."));
     } finally {
       setLoading(false);
     }

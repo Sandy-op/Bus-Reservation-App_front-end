@@ -27,9 +27,9 @@ const UserLogin = () => {
         const redirectTo = location.state?.from || "/";
         navigate(redirectTo, { state: { busDetails } });
       })
-      .catch(() => {
-        alert("❌ Login Failed!");
-      })
+      .catch((error) => {
+        alert("❌ Login Failed!\n " + (error.response?.data?.message || "An unknown error occurred."));
+      })      
       .finally(() => {
         setLoading(false);
       });

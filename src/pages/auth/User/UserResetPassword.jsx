@@ -41,9 +41,8 @@ const UserResetPassword = () => {
       } else {
         setMessage("🚨 Oops! Something went wrong.");
       }
-    } catch (err) {
-      console.error(err);
-      setMessage("❌ Invalid details! Try again.");
+    } catch (error) {
+        setMessage("❌ Invalid details! Try again.\n " + (error.response?.data?.message || "An unknown error occurred."));
     } finally {
       setLoading(false);
     }

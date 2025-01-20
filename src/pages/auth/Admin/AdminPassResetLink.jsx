@@ -30,9 +30,8 @@ const AdminPassResetLink = () => {
       } else {
         setMessage('Oops! An error occurred. Please try again.');
       }
-    } catch (err) {
-      console.error('Error:', err);
-      setMessage('An error occurred. Please check your email and try again.');
+    } catch (error) {
+      setMessage(error.response?.data?.message || "An unknown error occurred.");
     } finally {
       setLoading(false);
     }
