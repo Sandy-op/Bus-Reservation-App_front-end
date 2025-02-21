@@ -18,6 +18,7 @@ import AdminHomePage from './pages/admin/AdminHomePage';
 import Protect from './components/security/Protect';
 import TicketDownload from './pages/ticket/TicketDownload';
 import ScrollToTop from './components/scrollToTop/ScrollToTop';
+import ViewBookedTickets from './pages/admin/ViewBookedTickets';
 
 const App = () => {
   return (
@@ -50,6 +51,7 @@ const App = () => {
         <Route path="/admin-reset-password" element={<AdminResetPassword />} />
         <Route path="/admin-signup" element={<AdminSignUp />} />
         <Route path="adminAuth/admin-home-page" element={<Protect role="admin"><AdminHomePage /></Protect>} />
+        <Route path="adminAuth/admin-home-page/booked-tickets/:busId" element={<Protect role="admin"><ViewBookedTickets /></Protect>} />
 
         {/* Catch-All Route */}
         <Route path="*" element={<PageNotFound />} />

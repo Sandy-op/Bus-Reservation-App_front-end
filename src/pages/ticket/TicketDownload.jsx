@@ -30,9 +30,8 @@ const TicketDownload = () => {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-
       alert(`🎉 Ticket downloaded successfully! Have an epic journey, ${ticketResponse.username}!`);
-      navigate('');
+      navigate('/');
     } catch (error) {
       console.error('Error downloading the PDF:', error);
       alert("😭 Oh no! The ticket couldn't be downloaded. Curse the digital gremlins!");

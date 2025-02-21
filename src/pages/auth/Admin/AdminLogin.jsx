@@ -22,6 +22,8 @@ const AdminLogin = () => {
         alert("🚀 Login Successful!");
         const fetchedAdmin = res.data.data;
         localStorage.setItem("Admin", JSON.stringify(fetchedAdmin));
+        localStorage.setItem("adminId", fetchedAdmin.id);
+        localStorage.setItem("adminName",fetchedAdmin.name)
         navigate('admin-home-page');
       })
       .catch((error) => {
