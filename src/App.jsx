@@ -19,10 +19,12 @@ import Protect from './components/security/Protect';
 import TicketDownload from './pages/ticket/TicketDownload';
 import ScrollToTop from './components/scrollToTop/ScrollToTop';
 import ViewBookedTickets from './pages/admin/ViewBookedTickets';
+import InfoMessage from './pages/home_container/infoMsg/InfoMessage';
 
 const App = () => {
   return (
     <BrowserRouter>
+      <InfoMessage />
       <ScrollToTop />
       <Routes>
         {/*--------------- Routes with Nav -------------------*/}

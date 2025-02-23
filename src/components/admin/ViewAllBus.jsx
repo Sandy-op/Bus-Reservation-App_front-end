@@ -10,7 +10,10 @@ export default function ViewAllBus({ onEditBus }) {
     const adminId = localStorage.getItem("adminId");
 
     useEffect(() => {
-        if (!adminId) return;
+        if (!adminId) {
+            setLoading(false);
+            return;
+        };
 
         setLoading(true);
         axios.get(`${process.env.REACT_APP_URL}/api/buses/find/${adminId}`)
@@ -49,6 +52,10 @@ export default function ViewAllBus({ onEditBus }) {
             {loading ? (
                 <div className="flex items-center justify-center h-full">
                     <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+                </div>
+            ) : buses.length === 0 ? (
+                <div className="text-center text-red-600 text-xl font-semibold mt-10">
+                    No buses found, Please add bus first..
                 </div>
             ) : (
                 <div className="flex flex-wrap justify-center gap-12 w-full">

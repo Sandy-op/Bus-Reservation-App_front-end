@@ -9,7 +9,6 @@ const LandingPage = () => {
 
   return (
     <div className='w-full min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-300 flex flex-col overflow-hidden'>
-
       <Hero />
       <SearchBus />
       <Category />
