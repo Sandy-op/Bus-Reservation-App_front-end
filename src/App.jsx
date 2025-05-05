@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import MainLayout from './components/layouts/MainLayout';
 import LandingPage from './pages/LandingPage';
 import About from './pages/about/About';
@@ -18,12 +18,13 @@ import AdminHomePage from './pages/admin/AdminHomePage';
 import Protect from './components/security/Protect';
 import TicketDownload from './pages/ticket/TicketDownload';
 import ScrollToTop from './components/scrollToTop/ScrollToTop';
-import ViewBookedTickets from './pages/admin/ViewBookedTickets';
+import ViewBookedTickets from './components/admin/ViewBookedTickets';
 import InfoMessage from './pages/home_container/infoMsg/InfoMessage';
+import Profile from './components/user/user_myAccount/profile/Profile';
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <InfoMessage />
       <ScrollToTop />
       <Routes>
@@ -46,6 +47,7 @@ const App = () => {
         <Route path="/user-reset-password" element={<UserResetPassword />} />
         <Route path="/usersignup" element={<UserSignUp />} />
         <Route path="/reset-link" element={<PassResetLink />} />
+        <Route path="/my-profile" element={<Protect role="user"><Profile /></Protect>} />
 
         {/* admin authenticaton & general pages */}
         <Route path="/adminAuth" element={<AdminLogin />} />
@@ -57,9 +59,8 @@ const App = () => {
 
         {/* Catch-All Route */}
         <Route path="*" element={<PageNotFound />} />
-
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 };
 

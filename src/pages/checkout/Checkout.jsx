@@ -5,33 +5,46 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
     const location = useLocation();
-    const { busDetails, selectedSeats } = location.state || {};
+    const navigate = useNavigate();
+
+    const getStoredData = (key, fallback) => {
+        return location.state?.[key] || JSON.parse(localStorage.getItem(key)) || fallback;
+    };
+
+    const busDetails = getStoredData("busDetails", {});
+    const selectedSeats = getStoredData("selectedSeats", []);
+
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (busDetails) localStorage.setItem("busDetails", JSON.stringify(busDetails));
+        if (selectedSeats.length) localStorage.setItem("selectedSeats", JSON.stringify(selectedSeats));
+    }, [busDetails, selectedSeats]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
-    
+
         try {
-          const response = await axios.post(
-            `${process.env.REACT_APP_URL}/api/tickets/${busDetails.id}/${user.id}/${selectedSeats.length}/${selectedSeats}`
-          );
-          const ticketResponse =response.data;
-          navigate('/bus/bus-details/checkout/ticket',{ state: { ticketResponse: ticketResponse } })
-          alert('Ticket booked sucessfully!')
-          console.log(ticketResponse.id);
-          
-          
+            const response = await axios.post(
+                `${process.env.REACT_APP_URL}/api/tickets/${busDetails.id}/${user.id}/${selectedSeats.length}/${selectedSeats}`
+            );
+
+            const ticketResponse = response.data;
+            localStorage.setItem("ticketResponse", JSON.stringify(ticketResponse));
+            navigate('/bus/bus-details/checkout/ticket', { state: { ticketResponse } });
+            alert('Ticket booked successfully!');
+            console.log(ticketResponse.id);
         } catch (error) {
-          setError(error.response.data.message); 
+            setError(error.response?.data?.message || "Something went wrong");
         } finally {
-          setLoading(false);
+            setLoading(false);
         }
-      };
+    };
+
 
     useEffect(() => {
         const savedUser = localStorage.getItem("User");
@@ -151,7 +164,7 @@ const Checkout = () => {
                     </div>
 
                     <div className="w-full flex flex-col items-center gap-3">
-                        <button 
+                        <button
                             onClick={handleSubmit}
                             disabled={loading}
                             className="w-full px-8 h-12 bg-violet-600 text-neutral-50 text-base font-normal rounded-md flex items-center justify-center gap-x-2">
@@ -166,4 +179,3 @@ const Checkout = () => {
 };
 
 export default Checkout;
-

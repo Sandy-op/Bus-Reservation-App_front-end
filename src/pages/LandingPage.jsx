@@ -1,9 +1,10 @@
 import React from 'react';
-import SearchBus from './search/SearchBus';
+import SearchBus from './home_container/search/SearchBus';
 import ImageSlider from '../components/ImgSlider/ImageSlider';
 import Hero from "./home_container/hero/Hero";
 import Category from './home_container/category/Category';
 import  Offer  from './home_container/offer/Offer';
+import AvailableBus from './home_container/availableBus/AvailableBus';
 
 const LandingPage = () => {
 
@@ -11,6 +12,7 @@ const LandingPage = () => {
     <div className='w-full min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-300 flex flex-col overflow-hidden'>
       <Hero />
       <SearchBus />
+      <AvailableBus />
       <Category />
       <Offer />
       <ImageSlider />

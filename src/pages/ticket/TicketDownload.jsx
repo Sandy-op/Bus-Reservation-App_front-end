@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const TicketDownload = () => {
   const location = useLocation();
-  const ticketResponse = location.state?.ticketResponse;
+  
+  const getStoredData = () => {
+    if (location.state?.ticketResponse) {
+      return location.state.ticketResponse;
+    }
+    const storedData = localStorage.getItem("ticketResponse");
+    return storedData ? JSON.parse(storedData).ticketResponse : [];
+  };
+  
+  const ticketResponse = getStoredData();
+
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleDownload = async () => {
     if (!ticketResponse || !ticketResponse.id) {
@@ -13,6 +24,7 @@ const TicketDownload = () => {
       return;
     }
 
+    setLoading(true);
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_URL}/api/tickets/download/${ticketResponse.id}`,
@@ -35,6 +47,8 @@ const TicketDownload = () => {
     } catch (error) {
       console.error('Error downloading the PDF:', error);
       alert("😭 Oh no! The ticket couldn't be downloaded. Curse the digital gremlins!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -79,9 +93,10 @@ const TicketDownload = () => {
         </div>
         <button
           onClick={handleDownload}
-          className="mt-10 w-full py-3 px-6 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-lg font-bold rounded-full shadow-xl hover:shadow-2xl hover:scale-110 transform transition-all duration-500 hover:bg-gradient-to-l animate-bounce"
+          className={`mt-10 w-full py-3 px-6 text-white text-lg font-bold rounded-full shadow-xl transition-all duration-500 transform ${loading ? 'bg-gray-500 cursor-not-allowed' : 'bg-gradient-to-r from-pink-500 to-purple-500 hover:shadow-2xl hover:scale-110 hover:bg-gradient-to-l animate-bounce'}`}
+          disabled={loading}
         >
-          🚀 Download My Ticket
+          {loading ? '⏳ Downloading...' : '🚀 Download My Ticket'}
         </button>
       </div>
     </div>

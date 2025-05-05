@@ -14,26 +14,25 @@ const Seat = ({ isSelected, isBooked, onClick }) => {
 };
 
 const BusSeatLayout = ({ busDetails, bookedSeats = [], onSeatsChange }) => {
-
     const totalSeats = busDetails.numberOfSeats || 40;
     const [selectedSeats, setSelectedSeats] = useState([]);
 
     const handleSeatClick = (seatNumber) => {
-         const newSelectedSeats = selectedSeats.includes(seatNumber)
+        const newSelectedSeats = selectedSeats.includes(seatNumber)
             ? selectedSeats.filter(seat => seat !== seatNumber)
             : selectedSeats.length < 10
-            ? [...selectedSeats, seatNumber]
-            : selectedSeats; 
-            
-            if (newSelectedSeats !== selectedSeats) {
-                setSelectedSeats(newSelectedSeats); 
-                if (onSeatsChange) {
-                    onSeatsChange(newSelectedSeats); 
-                }
-            } else if (selectedSeats.length >= 10) {
-                alert("You can only select a maximum of 10 seats."); 
+                ? [...selectedSeats, seatNumber]
+                : selectedSeats;
+
+        if (newSelectedSeats !== selectedSeats) {
+            setSelectedSeats(newSelectedSeats);
+            if (onSeatsChange) {
+                onSeatsChange(newSelectedSeats); 
             }
-        };
+        } else if (selectedSeats.length >= 10) {
+            alert("You can only select a maximum of 10 seats.");
+        }
+    };
 
     const renderSeats = () => {
         let seats = [];
@@ -111,7 +110,7 @@ const BusSeatLayout = ({ busDetails, bookedSeats = [], onSeatsChange }) => {
                     <div className="flex items-center gap-x-2">
                         <RiMoneyRupeeCircleLine className='text-lg text-yellow-600' />
                         <p className="text-neutral-900 dark:text-neutral-200 text-sm font-normal">
-                            Rs. {}
+                            Rs. { }
                         </p>
                     </div>
                 </div>

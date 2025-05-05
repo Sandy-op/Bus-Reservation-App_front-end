@@ -9,6 +9,7 @@ const SearchBus = () => {
   const [dateOfDeparture, setDate] = useState("");
   const [buses, setBuses] = useState([]);
   const [searched, setSearched] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleFromChange = (e) => setFrom(e.target.value);
@@ -16,6 +17,9 @@ const SearchBus = () => {
 
   const searchBus = (e) => {
     e.preventDefault();
+    setSearched(false);
+    setLoading(true);
+
     axios
       .get(
         `${process.env.REACT_APP_URL}/api/buses/find?from=${from}&to=${to}&dateOfDeparture=${dateOfDeparture}`
@@ -24,14 +28,18 @@ const SearchBus = () => {
         const fetchedBuses = res.data.data;
         setBuses(fetchedBuses);
         setSearched(true);
+        setLoading(false);
 
         if (fetchedBuses.length > 0) {
-          navigate("/bus", { state: { buses: fetchedBuses } });
+          const searchData = { from, to, dateOfDeparture, buses: fetchedBuses };
+          localStorage.setItem("searchData", JSON.stringify(searchData));
+          navigate("/bus", { state: searchData }); 
         }
       })
       .catch((err) => {
         console.error("Error fetching buses:", err);
         setSearched(true);
+        setLoading(false);
       });
   };
 
@@ -41,7 +49,6 @@ const SearchBus = () => {
         <h1 className="text-center text-xl font-bold text-gray-800 dark:text-gray-100 mb-5">
           Search for Buses
         </h1>
-        {/* Search Form */}
         <motion.form
           onSubmit={searchBus}
           className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6"
@@ -50,7 +57,6 @@ const SearchBus = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <div className="flex flex-col lg:flex-row lg:items-end lg:space-x-4 space-y-4 lg:space-y-0">
-            {/* From Input */}
             <div className="flex-1">
               <label
                 htmlFor="from"
@@ -86,7 +92,6 @@ const SearchBus = () => {
               />
             </div>
 
-            {/* Date Input */}
             <div className="flex-1">
               <label
                 htmlFor="date"
@@ -103,7 +108,6 @@ const SearchBus = () => {
               />
             </div>
 
-            {/* Search Button */}
             <div className="lg:w-auto">
               <motion.button
                 type="submit"
@@ -117,8 +121,13 @@ const SearchBus = () => {
           </div>
         </motion.form>
 
-        {/* Search Results */}
-        {searched && (
+        {loading && (
+          <div className="flex justify-center mt-6">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-purple-500"></div>
+          </div>
+        )}
+
+        {searched && !loading && (
           <motion.div
             className="mt-6"
             initial={{ opacity: 0 }}

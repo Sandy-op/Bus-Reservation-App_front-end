@@ -10,6 +10,8 @@ const AddBus = ({ onClose }) => {
         boardingPoint: '', droppingPoint: ''
     });
 
+    const [loading, setLoading] = useState(false);
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -18,6 +20,7 @@ const AddBus = ({ onClose }) => {
 
     const addBusData = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             await axios.post(`${process.env.REACT_APP_URL}/api/buses/${admin.id}`, formData);
             alert('Bus Details Added Successfully');
@@ -26,6 +29,7 @@ const AddBus = ({ onClose }) => {
             console.error(err);
             alert('Invalid Data Format');
         }
+        setLoading(false);
     };
 
     return (
@@ -46,11 +50,12 @@ const AddBus = ({ onClose }) => {
                             placeholder={key.replace(/([A-Z])/g, ' $1').trim()}
                             className="w-full px-4 py-2 text-white bg-gray-700 bg-opacity-50 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
                             required
+                            disabled={loading}
                         />
                     ))}
                     <div className="flex justify-between mt-4">
                         <button type="button" onClick={onClose} className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition">Cancel</button>
-                        <button type="submit" className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition">Add Bus</button>
+                        <button type="submit" disabled={loading} className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition">{loading ? "Adding..." : "Add Bus"}</button>
                     </div>
                 </form>
             </div>
